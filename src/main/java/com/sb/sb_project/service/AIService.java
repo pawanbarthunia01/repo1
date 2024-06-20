@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -50,6 +51,12 @@ public class AIService {
         responseOfEmployee.setPayload(numberOfDepartment);
         response.put("code",209);
         response.put("response",responseOfEmployee);
+        response.put("status","success");
+        Map<String,Long> numberOfSyneMaleFemale=employees.stream().filter(emp->emp.getClientName().equalsIgnoreCase("Synechrone"))
+                .collect(Collectors.groupingBy(Employee::getGender,Collectors.counting()));
+
+        response.put("code",209);
+        response.put("response",numberOfSyneMaleFemale);
         response.put("status","success");
         return response;
 
