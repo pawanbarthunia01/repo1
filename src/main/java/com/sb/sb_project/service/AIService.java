@@ -52,12 +52,12 @@ public class AIService {
         response.put("code",209);
         response.put("response",responseOfEmployee);
         response.put("status","success");
-        Map<String,Long> numberOfSyneMaleFemale=employees.stream().filter(emp->emp.getClientName().equalsIgnoreCase("Synechrone"))
+        Map<String,Long> numberOfSyneMaleFemale=employees.stream().filter(emp->emp.getClientName().equalsIgnoreCase("Synechrone Bench"))
                 .collect(Collectors.groupingBy(Employee::getGender,Collectors.counting()));
 
-        response.put("code",209);
-        response.put("response",numberOfSyneMaleFemale);
-        response.put("status","success");
+        response.put("codeNF",209);
+        response.put("responseNF",numberOfSyneMaleFemale);
+        response.put("statusNF","success");
         return response;
 
     }
