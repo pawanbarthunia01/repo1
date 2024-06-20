@@ -1,8 +1,10 @@
 package com.sb.sb_project.service;
 
 import com.sb.sb_project.request.EmployeeRequest;
+import com.sb.sb_project.response.EmployeResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,5 +35,23 @@ public class AIService {
         response.put("employeeList",fetchEmployeeList());
         response.put("status","success");
         return response;
+    }
+
+    public HashMap<String, Object> fetchEmployeeDetail() {
+        HashMap<String,Object> response=new HashMap<>();
+        List<String> numberOfDepartment=new ArrayList<>();
+        List<Employee> employees=fetchEmployeeList();
+
+        employees.stream().map(Employee::getClientName).distinct().forEach(emp->{
+            numberOfDepartment.add(emp);
+        });
+        EmployeResponse responseOfEmployee=new EmployeResponse();
+        responseOfEmployee.setCount(numberOfDepartment.size());
+        responseOfEmployee.setPayload(numberOfDepartment);
+        response.put("code",209);
+        response.put("response",responseOfEmployee);
+        response.put("status","success");
+        return response;
+
     }
 }

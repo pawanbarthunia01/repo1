@@ -5,10 +5,7 @@ import com.sb.sb_project.service.AIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -21,5 +18,9 @@ public class AIController {
     @PostMapping("/")
     public ResponseEntity<HashMap<String,Object>> addEmployee(@RequestBody EmployeeRequest employeeRequest){
         return new ResponseEntity<>(aiService.addEmployee(employeeRequest), HttpStatus.OK);
+    }
+    @GetMapping("/fetchData")
+    public ResponseEntity<HashMap<String,Object>> fetchEmployeeDetail(){
+        return new ResponseEntity<>(aiService.fetchEmployeeDetail(),HttpStatus.OK);
     }
 }
